@@ -8,13 +8,11 @@ const apiRouter = express.Router();
 apiRoutes(apiRouter, database);
 app.use('/api', apiRouter);
 
-
+app.use(express.static('public'));
 
 app.get("/test", async (req, res) => {
   res.send("🤗");
 });
-
-
 
 
 const port = process.env.PORT || 3000; 

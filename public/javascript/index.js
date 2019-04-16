@@ -42,7 +42,7 @@ $(() => {
     $.ajax({
       url: "/api/properties",
     }).done(function( json ) {
-      addProperties(json);
+      addProperties(json.properties);
     });
   }
 

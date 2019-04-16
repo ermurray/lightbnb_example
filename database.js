@@ -4,11 +4,11 @@ const users = require('./json/users.json');
 /// Properties
 
 const getAllPropertiesInCity = async function(properties, city) {
-  const filteredProperties = [];
+  const filteredProperties = {};
   for (const id in properties) {
     const property = properties[id];
-    if (property.city === city) {
-      filteredProperties.push(property);
+    if (property.city.toLowerCase() === city.toLowerCase()) {
+      filteredProperties[id] = property;
     }
   }
   return filteredProperties;
@@ -17,11 +17,15 @@ const getAllPropertiesInCity = async function(properties, city) {
 const getAllProperties = async function(options) {
   let filteredProperties = properties;
   if (options.city) {
-    getAllPropertiesInCity(filteredProperties, options.city);
+    filteredProperties = await getAllPropertiesInCity(filteredProperties, options.city);
   }
   
-
-  return filteredProperties;
+  
+  const data = {
+    total: Object.keys(filteredProperties).length, 
+    properties: filteredProperties
+  };
+  return data;
 };
 exports.getAllProperties = getAllProperties;
 

@@ -1,6 +1,8 @@
 const properties = require('./json/properties.json');
 const users = require('./json/users.json');
 
+/// Properties
+
 const getAllPropertiesInCity = async function(properties, city) {
   const filteredProperties = [];
   for (const id in properties) {
@@ -22,3 +24,10 @@ const getAllProperties = async function(options) {
   return filteredProperties;
 };
 exports.getAllProperties = getAllProperties;
+
+/// Users
+
+const getUser = async function(id) {
+  return users[id];
+}
+exports.getUser = getUser;

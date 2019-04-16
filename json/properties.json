@@ -9,7 +9,7 @@
     "cover_photo_url": "",
     "active": true,
 
-    "cost_per_night": 99999999,
+    "cost_per_night": 99999,
     "wifi": true,
     "kitchen": true, 
     "laptop_friendly_workspace": true, 

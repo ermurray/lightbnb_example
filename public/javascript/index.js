@@ -40,7 +40,7 @@ $(() => {
 
   function getAllListings() {
     $.ajax({
-      url: "http://localhost:3000/api/properties",
+      url: "/api/properties",
     }).done(function( json ) {
       addProperties(json);
     });

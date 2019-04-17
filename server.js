@@ -2,14 +2,21 @@ const database = require('./database');
 const apiRoutes = require('./apiRoutes');
 
 const express = require('express');
-const cookieSession = require('cookie-session')
+const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(cookieSession({
   name: 'session',
   keys: ['key1']
-}))
+}));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// parse application/json
+app.use(bodyParser.json());
 
 const apiRouter = express.Router();
 apiRoutes(apiRouter, database);
@@ -17,12 +24,9 @@ app.use('/api', apiRouter);
 
 app.set('view engine', 'ejs');
 
-// app.get('/', (req, res) => {
-//   res.render('index');
-// });
+
 
 app.use(express.static('public'));
-
 
 app.get("/test", async (req, res) => {
   res.send("🤗");

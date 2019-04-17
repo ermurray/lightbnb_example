@@ -5,6 +5,11 @@ module.exports = function(router, database) {
     res.send(properties);
   });
 
+  router.post('/properties', (req, res) => {
+    console.log(req.body);
+    res.send("🤗");
+  })
+
   router.get("/users/me", async (req, res) => {
     const userId = req.session.userId;
     if (!userId) {

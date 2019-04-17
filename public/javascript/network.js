@@ -18,8 +18,12 @@ function logIn() {
   });
 }
 
-function getAllListings() {
+function getAllListings(params) {
+  let url = "/api/properties";
+  if (params) {
+    url += "?" + params;
+  }
   return $.ajax({
-    url: "/api/properties",
+    url,
   });
 }

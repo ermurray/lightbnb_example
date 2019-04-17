@@ -1,7 +1,6 @@
 $(() => {
 
   function updateHeader(user) {
-    console.log(user);
     const $pageHeader = $('#page-header');
     $pageHeader.find("#page-header__user-links").remove();
     let userLinks;
@@ -32,17 +31,21 @@ $(() => {
     $pageHeader.append(userLinks);
   }
 
-  getMyDetails().done(function( json ) {
+  getMyDetails().then(function( json ) {
     updateHeader(json.user);
   });
 
   $("body").on('click', '.login_button', () => {
-    logIn().done(function( json ) {
-      getMyDetails();
-    });
+    logIn()
+      .then(function( json ) {
+        return getMyDetails();
+      })
+      .then(function( json ) {
+        updateHeader(json.user);
+      });
   });
   $("body").on('click', '.logout_button', () => {
-    logOut().done(function( json ) {
+    logOut().then(function( json ) {
       updateHeader(null);
     });
   });

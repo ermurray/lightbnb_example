@@ -4,8 +4,10 @@ $(() => {
   window.$searchPropertyForm = $("#search-property-form");
   window.$propertyListings = $("#property-listings");
 
-  
-  window.show = function(item) {
+  const exports = {};
+  window.views = exports;
+
+  exports.show = function(item) {
     $newPropertyForm.addClass('hidden');
     $propertyListings.addClass('hidden');
     $searchPropertyForm.addClass('hidden');

@@ -1,11 +1,21 @@
 $(() => {
 
+  $searchPropertyForm.on('submit', function(event) {
+    event.preventDefault();
+    const data = $(this).serialize();
+
+    getAllListings(data).then(function( json ) {
+      propertyListings.addProperties(json.properties);
+      views.show('listings');
+    });
+  });
+
   $('body').on('click', '.search_button', function() {
-    show('searchProperty');
+    views.show('searchProperty');
   });
 
   $('#search-property-form__cancel').on('click', function() {
-    show('listings');
+    views.show('listings');
     return false;
   });
 

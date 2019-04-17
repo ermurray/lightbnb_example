@@ -1,5 +1,6 @@
 $(() => {
-  const propertyListings = $("#property-listings");
+  const exports = {};
+  window.propertyListings = exports;
 
   function createListing(property) {
     return `
@@ -25,20 +26,21 @@ $(() => {
   }
 
   function addListing(listing) {
-    propertyListings.append(listing);
+    $propertyListings.append(listing);
   }
 
   function addProperties(properties) {
+    $propertyListings.empty();
     for (const propertyId in properties) {
       const property = properties[propertyId];
       const listing = createListing(property);
-      console.log(listing);
       addListing(listing);
     }
   }
+  exports.addProperties = addProperties;
 
-  getAllListings().done(function( json ) {
+  getAllListings().then(function( json ) {
     addProperties(json.properties);
   });
-  
+
 });

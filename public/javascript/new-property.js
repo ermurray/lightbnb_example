@@ -25,27 +25,27 @@ $(() => {
   $newPropertyForm.on('submit', function (event) {
     event.preventDefault();
 
-    $newPropertyForm.addClass('hidden');
+    views.show('none');
 
     const data = $(this).serialize();
     submitProperty(data)
-    .done((data) => {
+    .then((data) => {
       console.log(data);
-      $propertyListings.removeClass('hidden');
+      views.show('listings');
     })
     .catch((error) => {
       console.log(error);
-      $propertyListings.removeClass('hidden');
+      views.show('listings');
     })
   });
 
   $('#property-form__cancel').on('click', function() {
-    show('properties');
+    views.show('properties');
     return false;
   });
 
   $('body').on('click', '.create_listing_button', function() {
-    show('newProperty');
+    views.show('newProperty');
   });
   
 });

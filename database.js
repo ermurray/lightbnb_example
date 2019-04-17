@@ -1,6 +1,8 @@
 const properties = require('./json/properties.json');
 const users = require('./json/users.json');
 
+const bcrypt = require('bcrypt');
+
 /// Properties
 
 const getAllPropertiesInCity = async function(properties, city) {
@@ -35,3 +37,31 @@ const getUser = async function(id) {
   return users[id];
 }
 exports.getUser = getUser;
+
+const login = async function(email, password) {
+  let user;
+  for (const userId in users) {
+    user = users[userId];
+    if (user.email.toLowerCase() === email.toLowerCase()) {
+      break;
+    } else {
+      user = null;
+    }
+  }
+
+  if (user && bcrypt.compareSync(password, user.password)) {
+    return user.id;
+  }
+
+  return null;
+}
+exports.login = login;
+
+const addUser = async function(user) {
+  user.password = bcrypt.hashSync(user.password, 12);
+  const userId = Object.keys(users).length + 1;
+  user.id = userId;
+  users[userId] = user;
+  return userId;
+}
+exports.addUser = addUser;

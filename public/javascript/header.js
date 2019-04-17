@@ -1,4 +1,6 @@
 $(() => {
+  const exports = {};
+  window.header = exports;
 
   function updateHeader(user) {
     const $pageHeader = $('#page-header');
@@ -11,7 +13,7 @@ $(() => {
         <ul>
           <li class="search_button">Search</li>
           <li class="login_button">Log In</li>
-          <li>Sign Up</li>
+          <li class="sign-up_button">Sign Up</li>
         </ul>
       </nav>
       `
@@ -31,22 +33,11 @@ $(() => {
     $pageHeader.append(userLinks);
   }
 
-  getMyDetails().then(function( json ) {
+  exports.updateHeader = updateHeader;
+
+  getMyDetails()
+    .then(function( json ) {
     updateHeader(json.user);
   });
 
-  $("body").on('click', '.login_button', () => {
-    logIn()
-      .then(function( json ) {
-        return getMyDetails();
-      })
-      .then(function( json ) {
-        updateHeader(json.user);
-      });
-  });
-  $("body").on('click', '.logout_button', () => {
-    logOut().then(function( json ) {
-      updateHeader(null);
-    });
-  });
 });

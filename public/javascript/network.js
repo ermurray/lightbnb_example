@@ -11,10 +11,19 @@ function logOut() {
   })
 }
 
-function logIn() {
+function logIn(data) {
   return $.ajax({
     method: "POST",
     url: "/login",
+    data
+  });
+}
+
+function signUp(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/sign-up",
+    data
   });
 }
 

@@ -32,8 +32,25 @@ app.get("/test", async (req, res) => {
   res.send("🤗");
 });
 
+
 app.post('/login', async (req, res) => {
-  req.session.userId = 1;
+  const {email, password} = req.body;
+  const userId = await database.login(email, password);
+  if (!userId) {
+    res.send({error: "error"});
+    return;
+  }
+  req.session.userId = userId;
+  res.send("🤗");
+});
+
+app.post('/sign-up', async (req, res) => {
+  const userId = await database.addUser(req.body);
+  if (!userId) {
+    res.send({error: "error"});
+    return;
+  }
+  req.session.userId = userId;
   res.send("🤗");
 });
 

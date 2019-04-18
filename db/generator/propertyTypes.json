@@ -1,0 +1,15 @@
+{
+  "1": {
+    "id": 1,
+    "type": "House"
+  },
+  "2": {
+    "id": 2,
+    "type": "Apartment"
+  },
+  "3": {
+    "id": 3,
+    "type": "Trailer"
+  }
+}
+

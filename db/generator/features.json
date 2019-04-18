@@ -1,0 +1,34 @@
+{
+  "1": {
+    "id": "1",
+    "feature": "wifi"
+  },
+  "2": {
+    "id": "2",
+    "feature": "kitchen" 
+  },
+  "3": {
+    "id": "3",
+    "feature": "laptop_friendly_workspace" 
+  },
+  "4": {
+    "id": "4",
+    "feature": "cable_tv"
+  },
+  "5": {
+    "id": "5",
+    "feature": "carbon_monoxide_detector"
+  },
+  "6": {
+    "id": "6",
+    "feature": "number_of_bedrooms"
+  },
+  "7": {
+    "id": "7",
+    "feature": "number_of_bathrooms"
+  },
+  "8": {
+    "id": "8",
+    "feature": "parking_spaces"
+  }
+}

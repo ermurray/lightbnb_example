@@ -13,15 +13,10 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE property_types (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  type VARCHAR(50) NOT NULL
-);
-
 CREATE TABLE properties (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   owner_id INTEGER REFERENCES user(id) ON DELETE CASCADE,
-  property_type INTEGER REFERENCES property_types(id) ON DELETE CASCADE,
+
   title VARCHAR(255) NOT NULL,
   description TEXT,
   thumbnail_photo_url VARCHAR(255) NOT NULL,
@@ -34,19 +29,6 @@ CREATE TABLE properties (
   post_code VARCHAR(255) NOT NULL,
 
   active BOOLEAN NOT NULL DEFAULT TRUE
-);
-
-
-CREATE TABLE features (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  feature VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE property_features (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
-  feature_id INTEGER REFERENCES features(id) ON DELETE CASCADE,
-  value INTEGER DEFAULT NULL
 );
 
 CREATE TABLE reservations (

@@ -3,10 +3,13 @@ const users = require('./users');
 const propertyTypes = require('./propertyTypes.json');
 const features = require('./features.json');
 const propertyFeatures = require('./propertyFeatures');
+const reservations = require('./reservations'); // Reservations do *not* attempt to make sure that bookings don't overlap
+const propertyReviews = require('./property_reviews');
 
-
-const totalUsers = 100;
-const totalProperties = 100;
+const totalUsers = 1000;
+const totalProperties = 1000;
+const totalReservations = 10000;
+const totalReviews = 10000;
 
 let sql = "";
 
@@ -45,24 +48,36 @@ for (let i = 0; i < totalUsers; i++) {
   dumpObjectIntoTable('users', user);
 }
 
-for (key in propertyTypes) {
-  dumpObjectIntoTable('property_types', propertyTypes[key]);
-}
+// for (key in propertyTypes) {
+//   dumpObjectIntoTable('property_types', propertyTypes[key]);
+// }
 
-for (let i = 0; i < totalUsers; i++) {
-  let property = properties.generate(totalUsers, Object.keys(propertyTypes).length);
+for (let i = 0; i < totalProperties; i++) {
+  let property = properties.generate(totalUsers);
   dumpObjectIntoTable('properties', property);
 }
 
-for (key in features) {
-  dumpObjectIntoTable('features', features[key]);
+const allReservations = [];
+for (let i = 0; i < totalReservations; i++) {
+  let res = reservations.generate(totalUsers, totalProperties);
+  allReservations.push(res);
+  dumpObjectIntoTable('reservations', res);
+}
+
+for (let i = 0; i < totalReviews; i++) {
+  let reviews = propertyReviews.generate(allReservations);
+  dumpObjectIntoTable('property_reviews', reviews);
 }
 
 
-const allPropertyFeatures = propertyFeatures.generate(totalProperties, features);
-for (pf of allPropertyFeatures) {
-  dumpObjectIntoTable('property_features', pf);
-}
+
+// for (key in features) {
+//   dumpObjectIntoTable('features', features[key]);
+// }
+// const allPropertyFeatures = propertyFeatures.generate(totalProperties, features);
+// for (pf of allPropertyFeatures) {
+//   dumpObjectIntoTable('property_features', pf);
+// }
 
 
 console.log(sql);

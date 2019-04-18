@@ -10,7 +10,7 @@ function random(limit) {
   return Math.floor(Math.random()*limit);
 }
 
-function generate(totalUsers, totalPropertyTypes) {
+function generate(totalUsers) {
   const titles = randomWords({exactly:1, wordsPerString:4, formatter: (word, index)=> {
     return index === 0 ? word.slice(0,1).toUpperCase().concat(word.slice(1)) : word;
   }});
@@ -25,7 +25,7 @@ function generate(totalUsers, totalPropertyTypes) {
     title: titles[0],
     description: descriptions[0],
     owner_id: random(totalUsers),
-    property_type: random(totalPropertyTypes),
+    // property_type: random(totalPropertyTypes),
     ...imageUrls,
     cost_per_night: random(100000),
     active: true,

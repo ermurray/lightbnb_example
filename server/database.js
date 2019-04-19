@@ -1,5 +1,5 @@
-const properties = require('./json/properties.json');
-const users = require('./json/users.json');
+const properties = require('../../db/json/properties.json');
+const users = require('../../db/json/users.json');
 
 const bcrypt = require('bcrypt');
 
@@ -16,12 +16,24 @@ const getAllPropertiesInCity = async function(properties, city) {
   return filteredProperties;
 };
 
-const getAllProperties = async function(options) {
+const getAllProperties = async function(options, limit) {
   let filteredProperties = properties;
   if (options.city) {
     filteredProperties = await getAllPropertiesInCity(filteredProperties, options.city);
   }
   
+  if (limit) {
+    const limitedProperties = {};
+    let count = 0;
+    for (const propertyId in filteredProperties) {
+      if (count++ >= limit) {
+        continue;
+      } else {
+        limitedProperties[propertyId] = properties[propertyId];
+      }
+    }
+    filteredProperties = limitedProperties;
+  }
   
   const data = {
     total: Object.keys(filteredProperties).length, 

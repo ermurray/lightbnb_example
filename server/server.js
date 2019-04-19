@@ -1,5 +1,6 @@
 const database = require('./database');
 const apiRoutes = require('./apiRoutes');
+const userRoutes = require('./userRoutes');
 
 const express = require('express');
 const cookieSession = require('cookie-session');
@@ -22,43 +23,15 @@ const apiRouter = express.Router();
 apiRoutes(apiRouter, database);
 app.use('/api', apiRouter);
 
-app.set('view engine', 'ejs');
+const userRouter = express.Router();
+userRoutes(userRouter, database);
+app.use('/', userRouter);
 
-
-
-app.use(express.static('public'));
+app.use(express.static('web/public'));
 
 app.get("/test", async (req, res) => {
   res.send("🤗");
 });
-
-
-app.post('/login', async (req, res) => {
-  const {email, password} = req.body;
-  const userId = await database.login(email, password);
-  if (!userId) {
-    res.send({error: "error"});
-    return;
-  }
-  req.session.userId = userId;
-  res.send("🤗");
-});
-
-app.post('/sign-up', async (req, res) => {
-  const userId = await database.addUser(req.body);
-  if (!userId) {
-    res.send({error: "error"});
-    return;
-  }
-  req.session.userId = userId;
-  res.send("🤗");
-});
-
-app.post('/logout', async (req, res) => {
-  req.session.userId = null;
-  res.send("🤗");
-});
-
 
 const port = process.env.PORT || 3000; 
 app.listen(port, (err) => console.log(err || `listening on port ${port} 😎`));

@@ -3,13 +3,13 @@ $(() => {
   window.propertyListings = exports;
 
   function createListing(property) {
+    console.log(property);
     return `
     <article class="property-listing">
         <section class="property-listing__preview-image">
-          <img src="https://www.fillmurray.com/300/200" alt="fillmurray">
+          <img src="${property.thumbnail_photo_url}" alt="house">
         </section>
         <section class="property-listing__details">
-          <p class="property-listing__type">${property.property_type}</p>
           <h3 class="property-listing__title">${property.title}</h3>
           <ul class="property-listing__details">
             <li>number_of_bedrooms: ${property.number_of_bedrooms}</li>

@@ -34,7 +34,7 @@ function generate() {
       if (typeof value === 'number' || typeof value === 'boolean') {
         sql += value;
       } else {
-        sql += `"${value}"`;
+        sql += `'${value}'`;
       }
       
       if (index < keys.length-1) {

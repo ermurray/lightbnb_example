@@ -1,10 +1,9 @@
-const random_name = require('node-random-name');
-const emailDomains = require('email-domains');
+const utils = require('./utils');
 
 function newUser() {
   return {
-    name: random_name(),
-    email: emailDomains.generate(),
+    name: utils.random_name(),
+    email: utils.randomEmail(),
     password: "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u." // bcrypted "password"
   }
 }

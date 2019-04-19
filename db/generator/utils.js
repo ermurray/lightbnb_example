@@ -3,6 +3,10 @@ const fs = require('fs');
 
 const writeFile = util.promisify(fs.writeFile);
 
+function escape(text) {
+  return text.replace(/'/gi, "''");
+}
+
 function writeToFile(path, text) {
   return writeFile(path, text, 'utf8');
 }
@@ -22,17 +26,23 @@ const randomBool = require('random-bool');
 exports.randomBool = randomBool;
 
 const randomWords = require('random-words');
-exports.randomWords = randomWords;
+exports.randomWords = (arg) => randomWords(arg).map(escape);
+
+const random_name = require('node-random-name');
+exports.random_name = () => escape(random_name());
+
+const emailDomains = require('email-domains');
+exports.randomEmail = () => escape(emailDomains.generate());
 
 // https://chancejs.com/usage/node.html
 const Chance = require('chance');
 const chance = new Chance();
 
-exports.sentence = chance.sentence.bind(chance);
-exports.randomAddress = chance.address.bind(chance);
-exports.randomCity = chance.city.bind(chance);
-exports.randomState = chance.state.bind(chance);
-exports.randomZip = chance.zip.bind(chance);
+exports.sentence = () => escape(chance.sentence());
+exports.randomAddress =  () => escape(chance.address());
+exports.randomCity =  () => escape(chance.city());
+exports.randomState =  () => escape(chance.state());
+exports.randomZip =  () => escape(chance.zip());
 
 
 

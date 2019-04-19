@@ -23,8 +23,8 @@ function generate(totalUsers, totalProperties) {
   const days = utils.random(30);
   return {
     id: id++,
-    guest_id: utils.random(totalUsers),
-    property_id: utils.random(totalProperties),
+    guest_id: utils.random(totalUsers-1, 1),
+    property_id: utils.random(totalProperties-1, 1),
     start_date: date(start),
     end_date: date(start+daysToMilliseconds(days))
   };

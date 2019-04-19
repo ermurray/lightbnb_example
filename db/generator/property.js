@@ -16,7 +16,7 @@ function generate(totalUsers) {
   return {
     title: titles[0],
     description: descriptions[0],
-    owner_id: utils.random(totalUsers),
+    owner_id: utils.random(totalUsers-1, 1),
     // property_type: utils.random(totalPropertyTypes),
     ...imageUrls,
     cost_per_night: utils.random(100000),

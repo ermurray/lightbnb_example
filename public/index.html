@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="styles/main.css">
+
+  <title>LightBnB</title>
+</head>
+<body>
+
+  <header id="page-header" class="page-header">
+    <nav id="page-header__user-links" class="page-header__user-links">
+      <ul>
+        <li>login</li>
+        <li>sign up</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="property-listings" id="property-listings">
+      <p>Loading...</p>
+      <!-- <article class="property-listing">
+        <section class="property-listing__preview-image">
+          <img src="https://www.fillmurray.com/300/200" alt="fillmurray">
+        </section>
+        <section class="property-listing__details">
+          <p class="property-listing__type">House</p>
+          <h3 class="property-listing__title">Some Nice Place Somewhere</h3>
+          <ul class="property-listing__details">
+            <li>number_of_bedrooms: 5</li>
+            <li>number_of_bathrooms: 10</li>
+            <li>parking_spaces: 0</li>
+          </ul>
+          <footer class="property-listing__footer">
+            <div class="property-listing__rating">4.5/5 stars</div>
+            <div class="property-listing__price">$200/night</div>
+          </footer>
+        </section>
+      </article> -->
+    </section>
+
+    <form action="/api/properties" method="post" id="new-property-form" class="new-property-form hidden">
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__title">Title</label>
+        <input type="text" name="title" placeholder="Title" id="new-property-form__title">
+      </div>
+      
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__description">Description</label>
+        <textarea placeholder="Description" name="description" id="property-form__description" cols="30" rows="10"></textarea>
+      </div>
+
+      <div class="new-property-form__field-wrapper">
+          <label for="new-property-form__type">Type</label>
+          <select id="new-property-form__type" name="type">
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+          </select>
+        </div>
+
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__bedrooms"># 🛌</label>
+        <input placeholder="# 🛌" type="number" name="number_of_bedrooms" id="new-property-form__bedrooms">
+
+        <label for="new-property-form__bathrooms"># 🚽</label>
+        <input placeholder="# 🚽" type="number" name="number_of_bathrooms" id="new-property-form__rooms">
+
+        <label for="new-property-form__parking"># 🚘</label>
+        <input placeholder="# 🚘" type="number" name="number_of_parking" id="new-property-form__parking">
+      </div>
+
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__cost">Cost Per Night</label>
+        <input placeholder="Cost Per Night" type="number" name="cost" id="new-property-form__cost">
+      </div>
+
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__thumbnail">Thumbnail Image</label>
+        <input placeholder="Thumbnail Image" type="text" name="thumb" id="new-property-form__thumbnail">
+      </div>
+
+      <div class="new-property-form__field-wrapper">
+        <label for="new-property-form__cover">Cover Image</label>
+        <input placeholder="Cover Image" type="text" name="cover" id="new-property-form__cover">
+      </div>
+
+      <hr>
+
+      <div class="new-property-form__field-wrapper">
+          <label for="new-property-form__street">Street</label>
+          <input placeholder="Street" type="text" id="new-property-form__street" />
+        </div>
+
+        <div class="new-property-form__field-wrapper">
+          <label for="new-property-form__country">Country</label>
+          <select id="new-property-form__country" name="country" data-country-selected="CA">
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="BR">Brazil</option>
+          </select>
+        </div>
+        <div id="new-property-form__locality-fields">
+          
+          <div class="new-property-form__field-wrapper">
+            <label for="new-property-form__city">City</label>
+            <input placeholder="City" type="text" name="city" id="new-property-form__city" />
+          </div>
+          <div class="new-property-form__field-wrapper">
+            <label for="new-property-form__state">Administrative Area</label>
+            <input placeholder="Administrative Area" type="text" name="provence" id="new-property-form__state" />
+          </div>
+          <div class="new-property-form__field-wrapper">
+            <label for="new-property-form__zip">Postal Code</label>
+            <input placeholder="Postal Code" type="text" name="post-code" id="new-property-form__zip" />
+          </div>
+        </div>
+
+        <div class="new-property-form__field-wrapper">
+            <button>Create</button>
+            <a id="property-form__cancel" href="#">Cancel</a>
+        </div>
+        
+    </form>
+
+    <form action="/properties" method="get" id="search-property-form" class="search-property-form hidden">
+      <div class="search-property-form__field-wrapper">
+        <label for="search-property-form__city">City</label>
+        <input type="text" name="city" placeholder="City" id="search-property-form__city">
+      </div>
+
+      <div class="search-property-form__field-wrapper">
+          <button>Search</button>
+          <a id="search-property-form__cancel" href="#">Cancel</a>
+      </div>
+    </form>
+
+    <form id="login-form" class="login-form hidden">
+      <p>Login</p>
+      <div class="login-form__field-wrapper">
+        <input type="email" name="email" placeholder="Email">
+      </div>
+
+      <div class="login-form__field-wrapper">
+          <input type="password" name="password" placeholder="Password">
+        </div>
+
+      <div class="login-form__field-wrapper">
+          <button>Login</button>
+          <a id="login-form__cancel" href="#">Cancel</a>
+      </div>
+    </form>
+
+    <form id="sign-up-form" class="sign-up-form hidden">
+        <p>Sign Up</p>
+
+        <div class="sign-up-form__field-wrapper">
+            <input type="text" name="name" placeholder="Username">
+          </div>
+
+        <div class="sign-up-form__field-wrapper">
+          <input type="email" name="email" placeholder="Email">
+        </div>
+  
+        <div class="sign-up-form__field-wrapper">
+            <input type="password" name="password" placeholder="Password">
+          </div>
+  
+        <div class="sign-up-form__field-wrapper">
+            <button>Sign Up</button>
+            <a id="sign-up-form__cancel" href="#">Cancel</a>
+        </div>
+      </form>
+
+    
+    
+
+  </main>
+  
+  <script src="javascript/jquery-3.4.0.min.js"></script>
+  <script src="javascript/jquery.addressfield.min.js"></script>
+  <script src="javascript/network.js"></script>
+  <script src="javascript/views.js"></script>
+  <script src="javascript/index.js"></script>
+  <script src="javascript/property-listings.js"></script>
+  <script src="javascript/new-property.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/header.js"></script>
+  <script src="javascript/login.js"></script>
+
+</body>
+</html>

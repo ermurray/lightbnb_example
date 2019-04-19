@@ -5,7 +5,7 @@ function newUser() {
   return {
     name: random_name(),
     email: emailDomains.generate(),
-    password: "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u."
+    password: "$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u." // bcrypted "password"
   }
 }
 exports.newUser = newUser;

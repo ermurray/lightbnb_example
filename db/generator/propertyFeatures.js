@@ -1,9 +1,4 @@
-const randomBool = require('random-bool');
-
-function random(limit) {
-  return Math.floor(Math.random()*limit);
-}
-
+const utils = require('./utils');
 
 function generate(totalProperties, features) {
   const propertyFeatures = [];
@@ -12,14 +7,14 @@ function generate(totalProperties, features) {
   for (let i = 0; i < totalProperties; i++) {
 
     for (const featureId in features) {
-      if (!randomBool()) {
+      if (!utils.randomBool()) {
         continue;
       }
 
       propertyFeatures.push({
         property_id: i,
         feature_id: Number(featureId),
-        value: random(10)
+        value: utils.random(10)
       });
     }
   }

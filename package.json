@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "local": "npx nodemon server.js",
+    "start": "node ./web/server/server.js",
+    "local": "npx nodemon ./web/server/server.js",
     "seed": "cd ./db/generator && node seeds",
-    "build": "npx sass ./sass/main.scss ./public/styles/main.css",
-    "sass": "npx sass --watch ./sass/main.scss ./public/styles/main.css"
+    "build": "npx sass ./web/sass/main.scss ./web/public/styles/main.css",
+    "sass": "npx sass --watch ./web/sass/main.scss ./web/public/styles/main.css"
   },
   "keywords": [],
   "author": "",

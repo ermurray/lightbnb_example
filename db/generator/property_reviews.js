@@ -6,7 +6,7 @@ function generate(reservations) {
     guest_id: reservation.guest_id,
     property_id: reservation.property_id,
     reservation_id: reservation.id,
-    rating: utils.random(6),
+    rating: utils.random(6, 3),
     message: utils.sentence()
   };
   

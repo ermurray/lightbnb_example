@@ -3,7 +3,7 @@ const utils = require('./utils');
 const images = require('./images');
 
 function generate(totalUsers) {
-  const titles = utils.randomWords({exactly:1, wordsPerString:4, formatter: (word, index)=> {
+  const titles = utils.randomWords({exactly:1, wordsPerString:2, formatter: (word, index)=> {
     return index === 0 ? word.slice(0,1).toUpperCase().concat(word.slice(1)) : word;
   }});
 
@@ -24,9 +24,10 @@ function generate(totalUsers) {
     number_of_bathrooms: utils.random(10),
     number_of_bedrooms: utils.random(10),
     active: true,
-    street: utils.randomAddress(),
-    city: utils.randomCity(),
     provence: utils.randomState({ full: true, territories: true } ),
+    city: utils.randomCity(this.provence),
+    country: utils.randomCountry(),
+    street: utils.randomAddress(),
     post_code: utils.randomZip()
   };
   

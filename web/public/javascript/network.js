@@ -36,3 +36,10 @@ function getAllListings(params) {
     url,
   });
 }
+
+function getAllReservations() {
+  let url = "/api/reservations";
+  return $.ajax({
+    url,
+  });
+}

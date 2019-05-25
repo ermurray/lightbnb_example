@@ -2,23 +2,29 @@ module.exports = function(router, database) {
 
   router.post('/login', async (req, res) => {
     const {email, password} = req.body;
-    const userId = await database.login(email, password);
-    if (!userId) {
-      res.send({error: "error"});
-      return;
-    }
-    req.session.userId = userId;
-    res.send("🤗");
+    database.login(email, password)
+      .then(userId => {
+        if (!userId) {
+          res.send({error: "error"});
+          return;
+        }
+        req.session.userId = userId;
+        res.send("🤗");
+      })
+      .catch(e => res.send(e));
   });
   
   router.post('/sign-up', async (req, res) => {
-    const userId = await database.addUser(req.body);
-    if (!userId) {
-      res.send({error: "error"});
-      return;
-    }
-    req.session.userId = userId;
-    res.send("🤗");
+    database.addUser(req.body)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.userId = user.id;
+      res.send("🤗");
+    })
+    .catch(e => res.send(e));
   });
   
   router.post('/logout', async (req, res) => {

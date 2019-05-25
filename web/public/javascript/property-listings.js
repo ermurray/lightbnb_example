@@ -2,8 +2,8 @@ $(() => {
   const exports = {};
   window.propertyListings = exports;
 
-  function createListing(property) {
-    console.log(property);
+  function createListing(property, isReservation) {
+    console.log(property, isReservation);
     return `
     <article class="property-listing">
         <section class="property-listing__preview-image">
@@ -16,8 +16,11 @@ $(() => {
             <li>number_of_bathrooms: ${property.number_of_bathrooms}</li>
             <li>parking_spaces: ${property.parking_spaces}</li>
           </ul>
+          ${isReservation ? 
+            `<p>${moment(property.start_date).format('ll')} - ${moment(property.end_date).format('ll')}</p>` 
+            : ``}
           <footer class="property-listing__footer">
-            <div class="property-listing__rating">4.5/5 stars</div>
+            <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
             <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
           </footer>
         </section>
@@ -29,11 +32,16 @@ $(() => {
     $propertyListings.append(listing);
   }
 
-  function addProperties(properties) {
+  function clearListings() {
     $propertyListings.empty();
+  }
+  exports.clearListings = clearListings;
+
+  function addProperties(properties, isReservation = false) {
+    clearListings();
     for (const propertyId in properties) {
       const property = properties[propertyId];
-      const listing = createListing(property);
+      const listing = createListing(property, isReservation);
       addListing(listing);
     }
   }

@@ -1,6 +1,8 @@
-const database = require('./database');
+const database = require('./db/queries');
 const apiRoutes = require('./apiRoutes');
 const userRoutes = require('./userRoutes');
+
+const path = require('path');
 
 const express = require('express');
 const cookieSession = require('cookie-session');
@@ -27,7 +29,7 @@ const userRouter = express.Router();
 userRoutes(userRouter, database);
 app.use('/', userRouter);
 
-app.use(express.static('web/public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get("/test", async (req, res) => {
   res.send("🤗");
